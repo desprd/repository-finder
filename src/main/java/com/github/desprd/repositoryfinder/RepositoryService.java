@@ -1,6 +1,7 @@
 package com.github.desprd.repositoryfinder;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +26,14 @@ public class RepositoryService {
     }
 
     private List<Repository> getFilteredRepositories(String username) {
-        return gitHubClient.getAllRepos(username)
-                .stream()
-                .filter(repository -> !repository.isFork())
-                .toList();
+        try {
+            return gitHubClient.getAllRepos(username)
+                    .stream()
+                    .filter(repository -> !repository.isFork())
+                    .toList();
+        } catch (HttpClientErrorException.NotFound e) {
+            throw new GitHubUserNotFoundException("User with username %s was not found".formatted(username));
+        }
     }
 
     private RepositoryResponse generateRepositoryResponse(Repository repository) {
