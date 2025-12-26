@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RepositoryService {
+class RepositoryService {
 
     private final GitHubClient gitHubClient;
 
-    public RepositoryService(GitHubClient gitHubClient) {
+    RepositoryService(GitHubClient gitHubClient) {
         this.gitHubClient = gitHubClient;
     }
 
-    public List<RepositoryResponse> getRepositoryResponseList(String username) {
+    List<RepositoryResponse> getRepositoryResponseList(String username) {
         List<RepositoryResponse> responses = new ArrayList<>();
         List<Repository> filteredRepositories = getFilteredRepositories(username);
         for (Repository repository: filteredRepositories) {

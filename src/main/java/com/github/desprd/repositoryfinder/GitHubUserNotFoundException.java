@@ -1,7 +1,7 @@
 package com.github.desprd.repositoryfinder;
 
-public class GitHubUserNotFoundException extends RuntimeException{
-    public GitHubUserNotFoundException(String message) {
+class GitHubUserNotFoundException extends RuntimeException{
+    GitHubUserNotFoundException(String message) {
         super(message);
     }
 }

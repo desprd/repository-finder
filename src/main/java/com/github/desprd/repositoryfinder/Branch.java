@@ -2,11 +2,9 @@ package com.github.desprd.repositoryfinder;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 public record Branch(
         String name,
-        @JsonUnwrapped
         @JsonProperty("commit")
         LastCommit lastCommit
 ) {
